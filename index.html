@@ -1,0 +1,359 @@
+<html>
+	<head>
+		<style>
+			/*
+
+				en dropdown meny for subkategorier som linux/kali/java et cetera
+				når et element fra den blir klikket, scroll *til* den seksjonen ved å bruke element.scroll
+
+
+				farger for labels/news/stickers: ;
+					lilla: 6A5DCF
+					rød: D85342;
+					svart: 242525;
+					grønn: 3FAC17;
+				
+				lag en dropdown 3d skewed meny med subcategories(h4-kategoriene)
+
+				blur inactive except hovered? more shadows but not yet
+				get text-content from json
+
+				when display is not active, display canvas 3d there instead? or videogame?
+
+
+				2C3E50
+				8080C0
+				1BA68A
+				29394A
+				2BFFA5
+				B978F2
+				2BFFA5
+				8F55F8
+				83B7E6
+			*/
+			/* The animation code */
+			@keyframes example {
+			  0% {
+			  	/*text-shadow: 1px 2px 1vh lime;*/
+			  	opacity: 1.0;
+
+			  }
+			  50% {
+			  	opacity: 0.76;
+				/*text-shadow: 2px 3px 2vw lime;	*/		  	
+			  }
+			  100% {
+			  	opacity: 0.88;
+			  	/*text-shadow: 3px 1px 2vh lime;*/
+			  }
+			}
+
+			/* The element to apply the animation to */
+			
+			* {-webkit-font-smoothing: antialiased; margin: 0;box-sizing:border-box; color: #83B7E6;background: #131313;}
+			h1 {width: 100%; text-align: center;}
+			body {
+				font-family: "Segoe UI Light",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+				height: 100%;
+				transform-style: preserve-3d;
+				perspective: 20vw;
+			}
+
+
+			/* width */
+			::-webkit-scrollbar {
+			  width: 1vw;
+			  overflow: auto;
+			}
+
+			/* Track */
+			::-webkit-scrollbar-track {
+			  box-shadow: inset 0 0 1vh #2A3492;
+			  box-shadow: inset 3px 2px 8px 1px #2a3492;
+			  
+			  border-radius: 8vw;
+
+    			  /*border-width: 0.1vh;*/
+    			  border-style: 1px solid #131313;
+    			  border-color: #2a3492;
+			  
+			/*
+			  border-top-right-radius: 1vw;
+			  border-bottom-left-radius: 1vw;
+
+			  border-top-left-radius: 1vh;
+			  border-bottom-right-radius: 1vh;
+			  */
+			}
+
+			::-webkit-scrollbar-corner{
+				color: lime;
+				background: magenta;
+				width: 5vh;
+				height: 5vh;
+			}
+
+			/* Handle */
+			::-webkit-scrollbar-thumb {
+			  /*background: #CE1E38;*/
+			  background: #2C5961;
+			  /*background:  #E74A46;*/
+			  border-radius: 2vw;
+
+
+/*			
+			  border-top-right-radius: 1vw;
+			 border-bottom-left-radius: 1vw;
+
+			  border-top-left-radius: 1vh;
+			  border-bottom-right-radius: 1vh;
+*/			   
+			}
+			
+			.center {
+				display:flex; 
+				justify-content:center;
+				
+			}
+			.center-tree{
+				flex-direction: column; 
+				align-items:center;
+			}
+			.side-content {
+				margin: 5vw;
+				margin-bottom: 0;
+				margin-top: 6vw;
+			}
+			.skill-display{
+				border:2px solid  #83B7E6;
+				border-radius: 50px;
+				content-visibility: hidden;
+				transform: skewX(-6deg);
+				height: 60vh;
+				width: 44vw;
+				box-shadow: 11px 5px 0px 1px #2447C2;
+			}
+
+			.skilltree{
+				
+				height: 40vh;
+				width: 40vw;
+
+			}
+			.mid-seperator {
+				background: #83B7E6;
+				width: 2vw;
+				height: 100%;
+				border-radius: 4vw;
+			}
+			main{
+				width: 100%;
+				height: 80%;
+				display: flex;
+    				flex-direction: column;
+    				justify-content: space-around;
+    				position: absolute;
+				
+    				
+			}
+			h1 {
+				font-size: 44px;
+    				font-weight: 300;
+    				letter-spacing: 2.2px;
+    				font-optical-sizing: auto;
+    				text-rendering: geometricPrecision;
+    				/*outline-style: outset;*/
+    				/*outline-width: thin;*/
+			}
+
+			.subject-header{
+				padding-top: 0.3vh;
+				padding-bottom: 0.3vh;
+				padding-left: calc(0.5vw + 0.2vh);
+				padding-right: calc(0.5vw + 0.2vh);
+				margin-bottom: 0.48vh;
+				border-radius: 4px;
+
+				-webkit-text-stroke-width: unset;
+				border-color: #83B7E6;
+				border-width: 24px;
+				
+				outline-color: #131313;
+				outline-style: inset;
+				outline-width: 0;
+
+				transition: outline 0.02s linear, background 0.4s, color 0.08s, border-radius 0.08s linear, border-width 0.08s ease-in-out, -webkit-text-stroke-width 0.64s ease-in;
+				
+				animation-name: example;
+			  	animation-duration: 4s;
+			  	animation-iteration-count: infinite;
+			  	animation-direction: alternate;
+			}
+
+			.subject-header:hover{
+				background: #83B7E6;
+				color: #131313;
+				border-radius: 20px;
+				border-width: 16px;
+				-webkit-text-stroke-width: medium;
+				font-weight: 300;
+				outline: 0.2vh solid #83B7E6;
+				box-shadow: 0 0 2px 1px #83B7E6;
+			}
+			.display-inactive{
+				background: #131313;
+				color: #83B7E6;
+				transition:  background 0.16s, color 0.24s;
+			}
+			.display-focused{
+				background: #83B7E6;
+				color: #131313;
+				content-visibility:  visible;
+				transition:  background 0.4s, color 0.2s, content 0.16s;
+			}
+
+			.display-text {
+				/*pointer-events: none;*/
+				color: #131313;
+				background: #83B7E6;
+				font-size: 16px;
+    				text-rendering: optimizelegibility;
+    				-webkit-text-stroke: thin;
+
+			}
+			.display-category-header{
+				padding: 2vw;
+				padding-bottom: 1vh;
+				padding-top: 0;
+				border: 0.48vh ridge #131313;
+				border-bottom: 0;
+				border-radius: 2vw;
+				box-shadow: 4px 2px 1px 3px #2447c2;
+				background: #131313;
+				color: #83B7E6;/*fargekombos kan være 1 class*/
+				
+
+			}
+			.display-text-header {
+				color: #131313;
+				/*background: #83B7E6;*//*fargekombos kan være 1 class*/
+				background: transparent;
+			}
+
+			.display-text-container{
+				width: 82%; 	/* burde være minux border-widthen på parent */
+				height: 70%;	/* burde være minux border-widthen på parent */
+				overflow-y: scroll;
+				overflow-x:  hidden;
+				/*padding-right: 1vh;	*/
+				padding: 5vh;
+    				border-radius: 4vh;
+    				border: 0.64vh solid #37706f9c;
+				box-shadow: inset -8px 11px 20px 1px #2447c2;
+			}
+			.display-blur{
+				filter: blur(5px);
+			}
+
+			#glcanvas{
+				border: 1vh solid #83B7E6;
+			}
+			.oflow{
+
+			}
+			
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/gl-matrix@3.0.0/gl-matrix-min.js"></script>
+	</head>
+	<body id="body">
+		<main>
+			<h1 style="margin-top:8vh;">Markus Knutson Barstad</h1>
+			<section class="center">
+
+				<div class="side-content center center-tree skilltree">
+					<h3>Skills</h3>
+					<span id="progr-desc"	class="subject-header">Programming</span>
+					<span id="linux-desc"	class="subject-header">Linux</span>
+					<span id="webdev-desc"	class="subject-header">Webdev</span>
+					<span id="netsec-desc"	class="subject-header">Networking/Security</span>
+				</div>
+				
+				<!--<div class="mid-seperator"></div>-->
+				<!--########################-->
+
+				<div id="display" class="side-content center center-tree skill-display">
+					
+					<h3 class="display-category-header">Networking/Security</h3>
+					<br>
+					<div class="display-text-container display-text">
+					
+							
+						<h4 class="display-text-header">Networking</h4>
+							I have a theoretical understanding of how information is abstracted across the OSI-model layers
+							<br>
+							I know how to build, configure, and administrate networks of devices(computers, routers, switches, firewalls, et cetera.)
+							<br>
+							I can build and administrate DMZ's, VLANs, proxies, VPNs, access-lists, trunked connections, and more network features and services.
+							<br>
+							I know network-utility protocols like the IEEE 802.1Q for VLAN-networks(which i can also trunk), the basic icmp, dhcp, basic dns, spanning-tree(for routing-table propagation between routers), other router-admin protocols,
+							<br>
+							I know and use packet-tracer for any network-building because it provides accurate network simulations and stress-tests before even touching the real gear and before putting anything online
+							<br>
+							<br>
+							<h4 class="display-text-header">Network-security</h4>
+						
+							strict Access-lists defined from a 'whitelisting' perspective to harden potential attack surfaces
+							<br>
+							Stateful/Stateless firewalls
+							<br>
+							SSH for remotely administrating/configuring routers and L4 switches
+							<br>
+							IPsec using both the Ikev1 and the more secure Ikev2-versions for handling the security association
+							<br>
+							Kerberos authentication-servers and more.
+							<br>
+						
+						
+					</div>
+					<!-- 
+						visibility hidden when display-focus
+						ha både spill og 3d visuals
+						lag en mer solid ramme(få til noe støvsuger-rør starcraftshiet med
+						live animation??)
+
+					-->
+			
+				</div>
+			</section>
+			<script defer>
+				let display = document.getElementById("display");
+				const subjectHeaders = document.getElementsByClassName("subject-header");
+				/*
+				burder være by tag i stedet for by id, og burde være by main-tag, etterfulgt av en z-indexert modal utenfor main-tag og blur
+				kanskje tøffest å bare transforme display-texxten til et passende sted, men da må den isåfall unngå modal-blurret somehow
+				*/
+				function makeModal(e) {
+					//document.getElementById("body").classList.add("display-blur");
+					e.stopPropagation();
+				}
+
+				function setDisplayBlack() {
+					display.classList.remove("display-focused");	
+				}
+
+				function setDisplayBlue(e) {
+					display.classList.add("display-focused");
+					e.stopPropagation(); // vi hindrer at bodyen også registrerer eventet
+				}
+
+				/*set ring rundt elementet som er selected, remove når et annet blir selectet eller når bruker trykker på body*/
+				
+				document.getElementById("body").addEventListener("click", setDisplayBlack);
+				display.addEventListener("click",makeModal);
+				for (let i = 0; i < subjectHeaders.length; i++) 
+					subjectHeaders[i].addEventListener("click", setDisplayBlue);
+			</script>		
+		</main>
+		
+	</body>
+</html>

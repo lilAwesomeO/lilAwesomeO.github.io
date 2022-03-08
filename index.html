@@ -2,7 +2,13 @@
 	<head>
 		<style>
 			/*
-
+				2DO:
+					- rydde opp i css(
+						lag root: variabler blant annet for å få helhet i små avstander, farger, radiuser osv,
+						lag klasser for farge-combos istedet for å sette så mange manuelt og crowde css-classessene,
+						CSS3D magix i bakgrunnen for ez fancies)
+			
+			
 				en dropdown meny for subkategorier som linux/kali/java et cetera
 				når et element fra den blir klikket, scroll *til* den seksjonen ved å bruke element.scroll
 
@@ -48,7 +54,7 @@
 			  }
 			}
 
-			/* The element to apply the animation to */
+	
 			
 			* {-webkit-font-smoothing: antialiased; margin: 0;box-sizing:border-box; color: #83B7E6;background: #131313;}
 			h1 {width: 100%; text-align: center;}
@@ -60,13 +66,12 @@
 			}
 
 
-			/* width */
 			::-webkit-scrollbar {
 			  width: 1vw;
 			  overflow: auto;
 			}
 
-			/* Track */
+	
 			::-webkit-scrollbar-track {
 			  box-shadow: inset 0 0 1vh #2A3492;
 			  box-shadow: inset 3px 2px 8px 1px #2a3492;
@@ -241,7 +246,7 @@
 			}
 
 			.display-text-container{
-				width: 82%; 	/* burde være minux border-widthen på parent */
+				width: 82%; 	/* burde være minux border-widthen på parent(eller noe) */
 				height: 70%;	/* burde være minux border-widthen på parent */
 				overflow-y: scroll;
 				overflow-x:  hidden;
